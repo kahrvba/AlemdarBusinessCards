@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 import { useState } from "react"
 import Image from "next/image"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Phone, FileText, RotateCcw } from "lucide-react"
+import { Phone, FileText } from "lucide-react"
 
 interface FlipCardProps {
   card: {
@@ -71,17 +71,11 @@ export function FlipCard({ card }: FlipCardProps) {
                   </div>
                 </div>
               )}
-              <div className="text-xs text-gray-400">Added {new Date(card.created_at).toLocaleDateString()}</div>
             </CardContent>
           </Card>
-          <button
-            className="w-full py-3 bg-blue-600 text-white text-lg font-bold rounded-b-lg flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            tabIndex={-1}
-            aria-label="Flip to back side"
-            type="button"
-          >
-            <RotateCcw className="h-5 w-5" /> Flip to Back
-          </button>
+          <div className="text-xs text-gray-400 text-center py-2 bg-gray-50 rounded-b-lg">
+            Added {new Date(card.created_at).toLocaleDateString()}
+          </div>
         </div>
 
         {/* Back Side */}
@@ -120,17 +114,11 @@ export function FlipCard({ card }: FlipCardProps) {
                   </div>
                 </div>
               )}
-              <div className="text-xs text-indigo-500">Added {new Date(card.created_at).toLocaleDateString()}</div>
             </CardContent>
           </Card>
-          <button
-            className="w-full py-3 bg-indigo-700 text-white text-lg font-bold rounded-b-lg flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-            tabIndex={-1}
-            aria-label="Flip to front side"
-            type="button"
-          >
-            <RotateCcw className="h-5 w-5" /> Flip to Front
-          </button>
+          <div className="text-xs text-gray-400 text-center py-2 bg-gray-50 rounded-b-lg">
+            Added {new Date(card.created_at).toLocaleDateString()}
+          </div>
         </div>
       </motion.div>
     </div>

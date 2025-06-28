@@ -1,5 +1,4 @@
 import type { NextConfig } from "next";
-
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
@@ -19,5 +18,4 @@ const nextConfig: NextConfig = {
     unoptimized: false,
   },
 };
-
 export default nextConfig;
