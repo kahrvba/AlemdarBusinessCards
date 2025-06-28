@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 import { useState } from "react"
 import Image from "next/image"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Phone, FileText } from "lucide-react"
+import { Phone, FileText, Edit } from "lucide-react"
 
 interface FlipCardProps {
   card: {
@@ -18,9 +18,10 @@ interface FlipCardProps {
     created_at: string
     updated_at: string
   }
+  onEdit?: (card: FlipCardProps['card']) => void
 }
 
-export function FlipCard({ card }: FlipCardProps) {
+export function FlipCard({ card, onEdit }: FlipCardProps) {
   const [isFlipped, setIsFlipped] = useState(false)
 
   return (
@@ -49,6 +50,18 @@ export function FlipCard({ card }: FlipCardProps) {
                     {card.phone_number}
                   </CardDescription>
                 </div>
+                {onEdit && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      onEdit(card)
+                    }}
+                    className="p-1 hover:bg-gray-100 rounded transition-colors"
+                    title="Edit card"
+                  >
+                    <Edit className="h-4 w-4 text-gray-500" />
+                  </button>
+                )}
               </div>
             </CardHeader>
             <CardContent className="space-y-4">

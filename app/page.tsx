@@ -25,6 +25,7 @@ interface BusinessCard {
 export default function BusinessCardManager() {
   const [cards, setCards] = useState<BusinessCard[]>([])
   const [searchTerm, setSearchTerm] = useState("")
+  const [editingCard, setEditingCard] = useState<BusinessCard | null>(null)
 
   const [formData, setFormData] = useState({
     first_name: "",
@@ -129,12 +130,29 @@ export default function BusinessCardManager() {
     setSaveStatus(null)
     setSaveMessage("")
     try {
-      const res = await fetch("/api/cards", {
-        method: "POST",
+      const url = editingCard ? `/api/cards/${editingCard.id}` : "/api/cards"
+      const method = editingCard ? "PUT" : "POST"
+      
+      const res = await fetch(url, {
+        method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       })
       if (!res.ok) throw new Error("Failed to save card")
+      
+      const updatedCard = await res.json()
+      
+      // Update local state immediately
+      if (editingCard) {
+        setCards(prevCards => 
+          prevCards.map(card => 
+            card.id === editingCard.id ? updatedCard : card
+          )
+        )
+      } else {
+        setCards(prevCards => [updatedCard, ...prevCards])
+      }
+      
       setFormData({
         first_name: "",
         last_name: "",
@@ -145,15 +163,43 @@ export default function BusinessCardManager() {
       })
       setFrontImageFile(null)
       setBackImageFile(null)
-      await fetchCards()
+      setEditingCard(null)
       setIsSubmitting(false)
       setSaveStatus("success")
-      setSaveMessage("Business card saved successfully!")
+      setSaveMessage(editingCard ? "Business card updated successfully!" : "Business card saved successfully!")
     } catch {
       setIsSubmitting(false)
       setSaveStatus("error")
       setSaveMessage("Failed to save business card. Please try again.")
     }
+  }
+
+  const handleEdit = (card: BusinessCard) => {
+    setEditingCard(card)
+    setFormData({
+      first_name: card.first_name,
+      last_name: card.last_name,
+      phone_number: card.phone_number,
+      note: card.note || "",
+      front_image_url: card.front_image_url || "",
+      back_image_url: card.back_image_url || "",
+    })
+  }
+
+  const handleCancelEdit = () => {
+    setEditingCard(null)
+    setFormData({
+      first_name: "",
+      last_name: "",
+      phone_number: "",
+      note: "",
+      front_image_url: "",
+      back_image_url: "",
+    })
+    setFrontImageFile(null)
+    setBackImageFile(null)
+    setSaveStatus(null)
+    setSaveMessage("")
   }
 
   const filteredCards = cards.filter((card) =>
@@ -180,15 +226,17 @@ export default function BusinessCardManager() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <User className="h-5 w-5" />
-                  Contact Information
+                  {editingCard ? "Edit Contact Information" : "Contact Information"}
                 </CardTitle>
-                <CardDescription>Enter the contact details from the business card</CardDescription>
+                <CardDescription>
+                  {editingCard ? "Update the contact details" : "Enter the contact details from the business card"}
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 {/* Saving/loading indicator and status message */}
                 {isSubmitting && (
                   <div className="flex items-center gap-2 mb-4 text-blue-700 text-lg font-bold">
-                    <Loader2 className="animate-spin h-6 w-6" /> Saving card, please wait...
+                    <Loader2 className="animate-spin h-6 w-6" /> {editingCard ? "Updating card, please wait..." : "Saving card, please wait..."}
                   </div>
                 )}
                 {saveStatus === "success" && (
@@ -309,12 +357,19 @@ export default function BusinessCardManager() {
                     </div>
                   </div>
 
-                  {/* Submit Button */}
-                  <Button type="submit" className="w-full" disabled={isSubmitting}>
-                    {isSubmitting ? (
-                      <span className="flex items-center gap-2"><Loader2 className="animate-spin h-5 w-5" /> Saving...</span>
-                    ) : "kartvızıtı kaydet"}
-                  </Button>
+                  {/* Submit and Cancel Buttons */}
+                  <div className="flex gap-3">
+                    <Button type="submit" className="flex-1" disabled={isSubmitting}>
+                      {isSubmitting ? (
+                        <span className="flex items-center gap-2"><Loader2 className="animate-spin h-5 w-5" /> {editingCard ? "Updating..." : "Saving..."}</span>
+                      ) : editingCard ? "Update Business Card" : "kartvızıtı kaydet"}
+                    </Button>
+                    {editingCard && (
+                      <Button type="button" variant="outline" onClick={handleCancelEdit} disabled={isSubmitting}>
+                        Cancel
+                      </Button>
+                    )}
+                  </div>
                 </form>
               </CardContent>
             </Card>
@@ -353,7 +408,7 @@ export default function BusinessCardManager() {
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                   {filteredCards.map((card) => (
-                    <FlipCard key={card.id} card={card} />
+                    <FlipCard key={card.id} card={card} onEdit={handleEdit} />
                   ))}
                 </div>
               )}
