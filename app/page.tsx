@@ -287,26 +287,26 @@ export default function BusinessCardManager() {
                 {/* Horizontal Layout - First Row */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="first_name">First Name</Label>
+                    <Label htmlFor="first_name">Full Name</Label>
                     <Input
                       id="first_name"
                       name="first_name"
                       type="text"
                       value={formData.first_name}
                       onChange={handleInputChange}
-                      placeholder="Enter first name"
+                      placeholder="Enter full name"
                       required
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="last_name">Last Name</Label>
+                    <Label htmlFor="last_name">firm name</Label>
                     <Input
                       id="last_name"
                       name="last_name"
                       type="text"
                       value={formData.last_name}
                       onChange={handleInputChange}
-                      placeholder="Enter last name"
+                      placeholder="Enter firm name"
                       required
                     />
                   </div>
@@ -332,7 +332,7 @@ export default function BusinessCardManager() {
                   <div className="space-y-2">
                     <Label htmlFor="note" className="flex items-center gap-2">
                       <FileText className="h-4 w-4" />
-                      Notes
+                      Story
                     </Label>
                     <Textarea
                       id="note"
