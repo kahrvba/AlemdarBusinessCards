@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { neon } from '@neondatabase/serverless';
 
-const DATABASE_URL = process.env.DATABASE_URL || 'postgresql://neondb_owner:npg_VGH4OnxCFv2P@ep-rapid-hall-a5gnlurt-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require';
+const DATABASE_URL = process.env.DATABASE_URL || 'postgresql://Cardsdb_owner:npg_yfuDmT0NVGs6@ep-long-mode-a8j4bzaz-pooler.eastus2.azure.neon.tech/Cardsdb?sslmode=require&channel_binding=require';
 const sql = neon(DATABASE_URL);
 
 export async function GET() {
