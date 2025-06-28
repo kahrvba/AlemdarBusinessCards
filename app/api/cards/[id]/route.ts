@@ -6,11 +6,11 @@ const sql = neon(DATABASE_URL);
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const startTime = Date.now();
   try {
-    const cardId = params.id;
+    const { id: cardId } = await params;
     
     if (!cardId) {
       return NextResponse.json({ error: 'Card ID is required' }, { status: 400 });
