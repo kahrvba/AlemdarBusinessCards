@@ -87,7 +87,7 @@ export function FlipCard({ card, onEdit }: FlipCardProps) {
             </CardContent>
           </Card>
           <div className="text-xs text-gray-400 text-center py-2 bg-gray-50 rounded-b-lg">
-            Added {new Date(card.created_at).toLocaleDateString()}
+            Eklenme: {new Date(card.created_at).toLocaleDateString('tr-TR')}
           </div>
         </div>
 
@@ -105,6 +105,18 @@ export function FlipCard({ card, onEdit }: FlipCardProps) {
                     {card.phone_number}
                   </CardDescription>
                 </div>
+                {onEdit && (
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      onEdit(card)
+                    }}
+                    className="p-1 hover:bg-gray-100 rounded transition-colors"
+                    title="Kartı düzenle"
+                  >
+                    <Edit className="h-4 w-4 text-gray-500" />
+                  </button>
+                )}
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -112,7 +124,7 @@ export function FlipCard({ card, onEdit }: FlipCardProps) {
                 <div className="relative rounded-lg overflow-hidden bg-gray-100 flex-1 min-h-[200px]">
                   <Image
                     src={card.back_image_url}
-                    alt={`${card.first_name} ${card.last_name} business card back`}
+                    alt={`${card.first_name} ${card.last_name} kartvizit arka`}
                     fill
                     className="object-contain"
                     unoptimized
@@ -130,7 +142,7 @@ export function FlipCard({ card, onEdit }: FlipCardProps) {
             </CardContent>
           </Card>
           <div className="text-xs text-gray-400 text-center py-2 bg-gray-50 rounded-b-lg">
-            Added {new Date(card.created_at).toLocaleDateString()}
+            Eklenme: {new Date(card.created_at).toLocaleDateString('tr-TR')}
           </div>
         </div>
       </motion.div>

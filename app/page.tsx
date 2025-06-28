@@ -166,11 +166,11 @@ export default function BusinessCardManager() {
       setEditingCard(null)
       setIsSubmitting(false)
       setSaveStatus("success")
-      setSaveMessage(editingCard ? "Business card updated successfully!" : "Business card saved successfully!")
+      setSaveMessage(editingCard ? "Kartvizit başarıyla güncellendi!" : "Kartvizit başarıyla kaydedildi!")
     } catch {
       setIsSubmitting(false)
       setSaveStatus("error")
-      setSaveMessage("Failed to save business card. Please try again.")
+      setSaveMessage("Kartvizit kaydedilemedi. Lütfen tekrar deneyin.")
     }
   }
 
@@ -214,8 +214,8 @@ export default function BusinessCardManager() {
       <div className="w-full">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Business Card Manager</h1>
-          <p className="text-gray-600">Manage your business cards and contacts</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Kartvizit Yöneticisi</h1>
+          <p className="text-gray-600">Kartvizitlerinizi ve kişilerinizi yönetin</p>
         </div>
 
         {/* Main Layout - Horizontal */}
@@ -226,17 +226,17 @@ export default function BusinessCardManager() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <User className="h-5 w-5" />
-                  {editingCard ? "Edit Contact Information" : "Contact Information"}
+                  {editingCard ? "Kişi Bilgilerini Düzenle" : "Kişi Bilgileri"}
                 </CardTitle>
                 <CardDescription>
-                  {editingCard ? "Update the contact details" : "Enter the contact details from the business card"}
+                  {editingCard ? "Kişi bilgilerini güncelleyin" : "Kartvizitten kişi bilgilerini girin"}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 {/* Saving/loading indicator and status message */}
                 {isSubmitting && (
                   <div className="flex items-center gap-2 mb-4 text-blue-700 text-lg font-bold">
-                    <Loader2 className="animate-spin h-6 w-6" /> {editingCard ? "Updating card, please wait..." : "Saving card, please wait..."}
+                    <Loader2 className="animate-spin h-6 w-6" /> {editingCard ? "Kart güncelleniyor, lütfen bekleyin..." : "Kart kaydediliyor, lütfen bekleyin..."}
                   </div>
                 )}
                 {saveStatus === "success" && (
@@ -260,7 +260,7 @@ export default function BusinessCardManager() {
                         type="text"
                         value={formData.first_name}
                         onChange={handleInputChange}
-                        placeholder="Enter full name"
+                        placeholder="Ad soyad girin"
                         required
                       />
                     </div>
@@ -272,7 +272,7 @@ export default function BusinessCardManager() {
                         type="text"
                         value={formData.last_name}
                         onChange={handleInputChange}
-                        placeholder="Enter firm name"
+                        placeholder="Firma adı girin"
                         required
                       />
                     </div>
@@ -287,7 +287,7 @@ export default function BusinessCardManager() {
                         type="tel"
                         value={formData.phone_number}
                         onChange={handleInputChange}
-                        placeholder="Enter phone number"
+                        placeholder="Telefon numarası girin"
                         required
                       />
                     </div>
@@ -305,7 +305,7 @@ export default function BusinessCardManager() {
                         name="note"
                         value={formData.note}
                         onChange={handleInputChange}
-                        placeholder="Add any notes or story about this contact..."
+                        placeholder="Bu kişi hakkında not veya hikaye ekleyin..."
                         className="min-h-[80px] resize-none"
                         required
                       />
@@ -329,7 +329,7 @@ export default function BusinessCardManager() {
                               <ImageIcon className="h-6 w-6 text-gray-400" />
                             )}
                             <span className="text-xs text-gray-600">
-                              {isUploadingFront ? 'Uploading...' : frontImageFile ? frontImageFile.name : 'Ön'}
+                              {isUploadingFront ? 'Yükleniyor...' : frontImageFile ? frontImageFile.name : 'Ön'}
                             </span>
                           </label>
                         </div>
@@ -349,7 +349,7 @@ export default function BusinessCardManager() {
                               <ImageIcon className="h-6 w-6 text-gray-400" />
                             )}
                             <span className="text-xs text-gray-600">
-                              {isUploadingBack ? 'Uploading...' : backImageFile ? backImageFile.name : 'arka'}
+                              {isUploadingBack ? 'Yükleniyor...' : backImageFile ? backImageFile.name : 'arka'}
                             </span>
                           </label>
                         </div>
@@ -361,12 +361,12 @@ export default function BusinessCardManager() {
                   <div className="flex gap-3">
                     <Button type="submit" className="flex-1" disabled={isSubmitting}>
                       {isSubmitting ? (
-                        <span className="flex items-center gap-2"><Loader2 className="animate-spin h-5 w-5" /> {editingCard ? "Updating..." : "Saving..."}</span>
-                      ) : editingCard ? "Update Business Card" : "kartvızıtı kaydet"}
+                        <span className="flex items-center gap-2"><Loader2 className="animate-spin h-5 w-5" /> {editingCard ? "Güncelleniyor..." : "Kaydediliyor..."}</span>
+                      ) : editingCard ? "Kartviziti Güncelle" : "kartvızıtı kaydet"}
                     </Button>
                     {editingCard && (
                       <Button type="button" variant="outline" onClick={handleCancelEdit} disabled={isSubmitting}>
-                        Cancel
+                        İptal
                       </Button>
                     )}
                   </div>
@@ -398,10 +398,10 @@ export default function BusinessCardManager() {
                   <CardContent>
                     <Grid3X3 className="h-12 w-12 text-gray-300 mx-auto mb-4" />
                     <h3 className="text-lg font-medium text-gray-900 mb-2">
-                      {searchTerm ? "No cards found" : "No business cards yet"}
+                      {searchTerm ? "Kart bulunamadı" : "Henüz kartvizit yok"}
                     </h3>
                     <p className="text-gray-500 mb-4">
-                      {searchTerm ? "Try adjusting your search terms" : "Start by adding your first business card"}
+                      {searchTerm ? "Arama terimlerinizi ayarlamayı deneyin" : "İlk kartvizitinizi ekleyerek başlayın"}
                     </p>
                   </CardContent>
                 </Card>
