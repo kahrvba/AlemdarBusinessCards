@@ -422,6 +422,7 @@ export default function BusinessCardManager() {
                         width={400}
                         height={250}
                         className="w-full h-auto object-contain"
+                        unoptimized
                       />
                     </div>
                   </div>
@@ -436,6 +437,7 @@ export default function BusinessCardManager() {
                         width={400}
                         height={250}
                         className="w-full h-auto object-contain"
+                        unoptimized
                       />
                     </div>
                   </div>

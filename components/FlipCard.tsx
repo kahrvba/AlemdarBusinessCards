@@ -59,6 +59,7 @@ export function FlipCard({ card }: FlipCardProps) {
                     alt={`${card.first_name} ${card.last_name} business card front`}
                     fill
                     className="object-contain"
+                    unoptimized
                   />
                 </div>
               )}
@@ -107,6 +108,7 @@ export function FlipCard({ card }: FlipCardProps) {
                     alt={`${card.first_name} ${card.last_name} business card back`}
                     fill
                     className="object-contain"
+                    unoptimized
                   />
                 </div>
               )}
