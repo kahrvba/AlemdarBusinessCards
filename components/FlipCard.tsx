@@ -12,6 +12,7 @@ interface FlipCardProps {
     first_name: string
     last_name: string
     phone_number: string
+    email?: string
     note?: string
     front_image_url?: string
     back_image_url?: string
@@ -76,6 +77,14 @@ export function FlipCard({ card, onEdit }: FlipCardProps) {
                   />
                 </div>
               )}
+              {card.email && card.email.trim() !== "" && (
+                <div className="bg-gray-100 rounded-lg p-3">
+                  <div className="flex items-start gap-2">
+                    <FileText className="h-4 w-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                    <p className="text-sm text-blue-800 line-clamp-3">{card.email}</p>
+                  </div>
+                </div>
+              )}
               {card.note && (
                 <div className="bg-gray-50 rounded-lg p-3">
                   <div className="flex items-start gap-2">
@@ -105,7 +114,7 @@ export function FlipCard({ card, onEdit }: FlipCardProps) {
                     {card.phone_number}
                   </CardDescription>
                 </div>
-                {onEdit && (
+                {onEdit && (  
                   <button
                     onClick={(e) => {
                       e.stopPropagation()
@@ -131,6 +140,14 @@ export function FlipCard({ card, onEdit }: FlipCardProps) {
                   />
                 </div>
               )}
+              {card.email && card.email.trim() !== "" && (
+                <div className="bg-blue-100 rounded-lg p-3">
+                  <div className="flex items-start gap-2">
+                    <FileText className="h-4 w-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                    <p className="text-sm text-blue-800 line-clamp-3">{card.email}</p>
+                  </div>
+                </div>
+              )}              
               {card.note && (
                 <div className="bg-indigo-100 rounded-lg p-3">
                   <div className="flex items-start gap-2">

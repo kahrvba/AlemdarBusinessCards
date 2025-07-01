@@ -356,22 +356,22 @@ export default function BusinessCardManager() {
                         </div>
                         <div className="border-2 border-dashed border-gray-300 rounded-lg p-3 text-center hover:border-gray-400 transition-colors">
                           <input
-                            id="backImage"
-                            type="file"
-                            accept="image/*"
-                            onChange={handleBackImageChange}
-                            className="hidden"
-                            disabled={isUploadingBack}
+                          id="backImage"
+                          type="file"
+                          accept="image/*"
+                          onChange={handleBackImageChange}
+                          className="hidden"
+                          disabled={isUploadingBack}
                           />
                           <label htmlFor="backImage" className={`cursor-pointer flex flex-col items-center gap-1 ${isUploadingBack ? 'opacity-50' : ''}`}>
-                            {isUploadingBack ? (
-                              <Loader2 className="h-6 w-6 text-blue-500 animate-spin" />
-                            ) : (
-                              <ImageIcon className="h-6 w-6 text-gray-400" />
-                            )}
-                            <span className="text-xs text-gray-600">
-                              {isUploadingBack ? 'Yükleniyor...' : backImageFile ? backImageFile.name : 'arka'}
-                            </span>
+                          {isUploadingBack ? (
+                            <Loader2 className="h-6 w-6 text-blue-500 animate-spin" />
+                          ) : (
+                            <ImageIcon className="h-6 w-6 text-gray-400" />
+                          )}
+                          <span className="text-xs text-gray-600">
+                            {isUploadingBack ? 'Yükleniyor...' : backImageFile ? backImageFile.name : 'arka'}
+                          </span>
                           </label>
                         </div>
                       </div>
