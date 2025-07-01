@@ -225,9 +225,9 @@ export default function BusinessCardManager() {
         </div>
 
         {/* Main Layout - Horizontal */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="space-y-10">
           {/* Left Side - Upload Form */}
-          <div className="lg:col-span-1">
+          <div className="w-full">
             <Card className="shadow-lg">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
@@ -297,25 +297,11 @@ export default function BusinessCardManager() {
                         required
                       />
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="email" className="flex items-center gap-2">
-                        <Phone className="h-4 w-4" />
-                        email adresi
-                      </Label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        placeholder="Email adresi girin"
-                        required
-                      />
-                    </div>
+             
                   </div>
 
                   {/* Horizontal Layout - Second Row */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="note" className="flex items-center gap-2">
                         <FileText className="h-4 w-4" />
@@ -330,10 +316,25 @@ export default function BusinessCardManager() {
                         className="min-h-[80px] resize-none"
                         required
                       />
+                             <div className="space-y-2">
+                      <Label htmlFor="email" className="flex items-center gap-2">
+                        <Phone className="h-4 w-4" />
+                        email adresi
+                      </Label>
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        placeholder="Email adresi girin"
+                        required
+                      />
+                    </div>
                     </div>
                     <div className="space-y-2">
                       <Label>fotoğraf</Label>
-                      <div className="grid grid-cols-2 gap-2">
+                      <div className="grid grid-cols-1 gap-2">
                         <div className="border-2 border-dashed border-gray-300 rounded-lg p-3 text-center hover:border-gray-400 transition-colors">
                           <input
                             id="frontImage"
