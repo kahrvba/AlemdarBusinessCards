@@ -15,6 +15,7 @@ interface BusinessCard {
   first_name: string
   last_name: string
   phone_number: string
+  email?: string
   note?: string
   front_image_url?: string
   back_image_url?: string
@@ -31,6 +32,7 @@ export default function BusinessCardManager() {
     first_name: "",
     last_name: "",
     phone_number: "",
+    email: "",
     note: "",
     front_image_url: "",
     back_image_url: "",
@@ -157,6 +159,7 @@ export default function BusinessCardManager() {
         first_name: "",
         last_name: "",
         phone_number: "",
+        email: "",
         note: "",
         front_image_url: "",
         back_image_url: "",
@@ -180,6 +183,7 @@ export default function BusinessCardManager() {
       first_name: card.first_name,
       last_name: card.last_name,
       phone_number: card.phone_number,
+      email: card.email || "",
       note: card.note || "",
       front_image_url: card.front_image_url || "",
       back_image_url: card.back_image_url || "",
@@ -192,6 +196,7 @@ export default function BusinessCardManager() {
       first_name: "",
       last_name: "",
       phone_number: "",
+      email: "",
       note: "",
       front_image_url: "",
       back_image_url: "",
@@ -206,6 +211,7 @@ export default function BusinessCardManager() {
     card.first_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     card.last_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     card.phone_number.includes(searchTerm) ||
+    (card.email && card.email.toLowerCase().includes(searchTerm.toLowerCase())) ||
     (card.note && card.note.toLowerCase().includes(searchTerm.toLowerCase()))
   )
 
@@ -288,6 +294,21 @@ export default function BusinessCardManager() {
                         value={formData.phone_number}
                         onChange={handleInputChange}
                         placeholder="Telefon numarası girin"
+                        required
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="email" className="flex items-center gap-2">
+                        <Phone className="h-4 w-4" />
+                        email adresi
+                      </Label>
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        placeholder="Email adresi girin"
                         required
                       />
                     </div>
