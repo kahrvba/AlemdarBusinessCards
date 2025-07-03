@@ -29,15 +29,15 @@ export async function POST(req: NextRequest) {
   const startTime = Date.now();
   try {
     const data = await req.json();
-    const { first_name, last_name, phone_number, note, front_image_url, back_image_url } = data;
+    const { first_name, last_name, phone_number, note, front_image_url, back_image_url,email } = data;
     if (!first_name || !last_name || !phone_number) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
     
     console.log('🔄 Saving business card to database...');
     const result = await sql`
-      INSERT INTO business_cards (id, first_name, last_name, phone_number, note, front_image_url, back_image_url, created_at, updated_at)
-      VALUES (gen_random_uuid()::text, ${first_name}, ${last_name}, ${phone_number}, ${note}, ${front_image_url}, ${back_image_url}, NOW(), NOW())
+      INSERT INTO business_cards (id, first_name, last_name, phone_number,email,  note, front_image_url, back_image_url, created_at, updated_at)
+      VALUES (gen_random_uuid()::text, ${first_name}, ${last_name}, ${phone_number}, ${email}, ${note}, ${front_image_url}, ${back_image_url}, NOW(), NOW())
       RETURNING *
     `;
     const endTime = Date.now();

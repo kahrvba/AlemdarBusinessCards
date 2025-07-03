@@ -26,7 +26,7 @@ export function FlipCard({ card, onEdit }: FlipCardProps) {
   const [isFlipped, setIsFlipped] = useState(false)
 
   return (
-    <div className="relative h-[400px] w-full perspective-1000 select-none">
+    <div className="relative min-h-[500px] w-full perspective-1000 select-none">
       <motion.div
         className="relative w-full h-full preserve-3d"
         animate={{ rotateY: isFlipped ? 180 : 0 }}
@@ -39,7 +39,7 @@ export function FlipCard({ card, onEdit }: FlipCardProps) {
       >
         {/* Front Side */}
         <div className="absolute w-full h-full backface-hidden flex flex-col justify-between">
-          <Card className="h-full shadow-lg hover:shadow-xl transition-shadow">
+          <Card className="flex flex-col justify-between h-full shadow-lg hover:shadow-xl transition-shadow min-h-[400px]">
             <CardHeader className="pb-3">
               <div className="flex justify-between items-start">
                 <div>
@@ -65,9 +65,28 @@ export function FlipCard({ card, onEdit }: FlipCardProps) {
                 )}
               </div>
             </CardHeader>
-            <CardContent className="space-y-4">
+
+            <CardContent className="flex flex-col gap-4 flex-grow">
+              {card.email && card.email.trim() !== "" && (
+                <div className="bg-blue-100 rounded-lg p-3">
+                  <div className="flex items-start gap-2">
+                    <FileText className="h-4 w-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                    <p className="text-sm text-blue-800 break-words whitespace-pre-wrap">{card.email}</p>
+                  </div>
+                </div>
+              )}
+
+              {card.note && (
+                <div className="bg-gray-100 rounded-lg p-3">
+                  <div className="flex items-start gap-2">
+                    <FileText className="h-4 w-4 text-gray-600 mt-0.5 flex-shrink-0" />
+                    <p className="text-sm text-gray-700 break-words whitespace-pre-wrap">{card.note}</p>
+                  </div>
+                </div>
+              )}
+
               {card.front_image_url && (
-                <div className="relative rounded-lg overflow-hidden bg-gray-100 flex-1 min-h-[200px]">
+                <div className="relative rounded-lg overflow-hidden bg-gray-100 mt-auto min-h-[180px]">
                   <Image
                     src={card.front_image_url}
                     alt={`${card.first_name} ${card.last_name} business card front`}
@@ -75,22 +94,6 @@ export function FlipCard({ card, onEdit }: FlipCardProps) {
                     className="object-contain"
                     unoptimized
                   />
-                </div>
-              )}
-              {card.email && card.email.trim() !== "" && (
-                <div className="bg-gray-100 rounded-lg p-3">
-                  <div className="flex items-start gap-2">
-                    <FileText className="h-4 w-4 text-blue-600 mt-0.5 flex-shrink-0" />
-                    <p className="text-sm text-blue-800 line-clamp-3">{card.email}</p>
-                  </div>
-                </div>
-              )}
-              {card.note && (
-                <div className="bg-gray-50 rounded-lg p-3">
-                  <div className="flex items-start gap-2">
-                    <FileText className="h-4 w-4 text-gray-500 mt-0.5 flex-shrink-0" />
-                    <p className="text-sm text-gray-600 line-clamp-3">{card.note}</p>
-                  </div>
                 </div>
               )}
             </CardContent>
@@ -102,7 +105,7 @@ export function FlipCard({ card, onEdit }: FlipCardProps) {
 
         {/* Back Side */}
         <div className="absolute w-full h-full backface-hidden rotate-y-180 flex flex-col justify-between">
-          <Card className="h-full shadow-lg hover:shadow-xl transition-shadow bg-gradient-to-br from-blue-50 to-indigo-50">
+          <Card className="flex flex-col justify-between h-full shadow-lg hover:shadow-xl transition-shadow bg-gradient-to-br from-blue-50 to-indigo-50 min-h-[400px]">
             <CardHeader className="pb-3">
               <div className="flex justify-between items-start">
                 <div>
@@ -114,7 +117,7 @@ export function FlipCard({ card, onEdit }: FlipCardProps) {
                     {card.phone_number}
                   </CardDescription>
                 </div>
-                {onEdit && (  
+                {onEdit && (
                   <button
                     onClick={(e) => {
                       e.stopPropagation()
@@ -128,9 +131,28 @@ export function FlipCard({ card, onEdit }: FlipCardProps) {
                 )}
               </div>
             </CardHeader>
-            <CardContent className="space-y-4">
+
+            <CardContent className="flex flex-col gap-4 flex-grow">
+              {card.email && card.email.trim() !== "" && (
+                <div className="bg-blue-100 rounded-lg p-3">
+                  <div className="flex items-start gap-2">
+                    <FileText className="h-4 w-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                    <p className="text-sm text-blue-800 break-words whitespace-pre-wrap">{card.email}</p>
+                  </div>
+                </div>
+              )}
+
+              {card.note && (
+                <div className="bg-indigo-100 rounded-lg p-3">
+                  <div className="flex items-start gap-2">
+                    <FileText className="h-4 w-4 text-indigo-600 mt-0.5 flex-shrink-0" />
+                    <p className="text-sm text-indigo-800 break-words whitespace-pre-wrap">{card.note}</p>
+                  </div>
+                </div>
+              )}
+
               {card.back_image_url && (
-                <div className="relative rounded-lg overflow-hidden bg-gray-100 flex-1 min-h-[200px]">
+                <div className="relative rounded-lg overflow-hidden bg-gray-100 mt-auto min-h-[180px]">
                   <Image
                     src={card.back_image_url}
                     alt={`${card.first_name} ${card.last_name} kartvizit arka`}
@@ -138,22 +160,6 @@ export function FlipCard({ card, onEdit }: FlipCardProps) {
                     className="object-contain"
                     unoptimized
                   />
-                </div>
-              )}
-              {card.email && card.email.trim() !== "" && (
-                <div className="bg-blue-100 rounded-lg p-3">
-                  <div className="flex items-start gap-2">
-                    <FileText className="h-4 w-4 text-blue-600 mt-0.5 flex-shrink-0" />
-                    <p className="text-sm text-blue-800 line-clamp-3">{card.email}</p>
-                  </div>
-                </div>
-              )}              
-              {card.note && (
-                <div className="bg-indigo-100 rounded-lg p-3">
-                  <div className="flex items-start gap-2">
-                    <FileText className="h-4 w-4 text-indigo-600 mt-0.5 flex-shrink-0" />
-                    <p className="text-sm text-indigo-800 line-clamp-3">{card.note}</p>
-                  </div>
                 </div>
               )}
             </CardContent>
@@ -165,4 +171,4 @@ export function FlipCard({ card, onEdit }: FlipCardProps) {
       </motion.div>
     </div>
   )
-} 
+}
