@@ -301,21 +301,8 @@ export default function BusinessCardManager() {
                   </div>
 
                   {/* Horizontal Layout - Second Row */}
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="note" className="flex items-center gap-2">
-                        <FileText className="h-4 w-4" />
-                        hıkaye 
-                      </Label>
-                      <Textarea
-                        id="note"
-                        name="note"
-                        value={formData.note}
-                        onChange={handleInputChange}
-                        placeholder="Bu kişi hakkında not veya hikaye ekleyin..."
-                        className="min-h-[80px] resize-none"
-                        required
-                      />
+                  <div className="  grid grid-cols-1 md:grid-cols-3 gap-4">
+
                              <div className="space-y-2">
                       <Label htmlFor="email" className="flex items-center gap-2">
                         <Phone className="h-4 w-4" />
@@ -328,6 +315,20 @@ export default function BusinessCardManager() {
                         value={formData.email}
                         onChange={handleInputChange}
                         placeholder="Email adresi girin"
+                        required
+                      />
+                                          <div className="space-y-2">
+                      <Label htmlFor="note" className="flex items-center gap-2">
+                        <FileText className="h-4 w-4" />
+                        hıkaye 
+                      </Label>
+                      <Textarea
+                        id="note"
+                        name="note"
+                        value={formData.note}
+                        onChange={handleInputChange}
+                        placeholder="Bu kişi hakkında not veya hikaye ekleyin..."
+                        className="min-h-[80px] resize-none"
                         required
                       />
                     </div>

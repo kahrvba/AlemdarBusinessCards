@@ -17,9 +17,9 @@ export async function PUT(
     }
 
     const data = await req.json();
-    const { first_name, last_name, phone_number, note, front_image_url, back_image_url } = data;
+    const { first_name, last_name, phone_number, note, front_image_url, back_image_url, email } = data;
     
-    if (!first_name || !last_name || !phone_number) {
+    if (!first_name || !last_name || !phone_number ) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
     
@@ -30,6 +30,7 @@ export async function PUT(
           last_name = ${last_name}, 
           phone_number = ${phone_number}, 
           note = ${note}, 
+          email = ${email},
           front_image_url = ${front_image_url}, 
           back_image_url = ${back_image_url}, 
           updated_at = NOW()
